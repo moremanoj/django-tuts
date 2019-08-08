@@ -3,7 +3,42 @@
     <main class="main-content">
         <div class="fullwidth-block content">
 			<div class="container">
-                <div id='calendar'></div>
+                	<div class="table-container">
+                            <div class="table-responsive">
+                                {% if services %}
+                                    <table class="table table-striped">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th  scope="col">Service Type</th>
+                                                <th  scope="col">Vehicle Type </th>
+                                                <th  scope="col">Vehicle Make</th>
+                                                <th  scope="col">Vehicle Licence</th>
+                                                <th  scope="col">Vehicle Engine Type</th>
+                                                <th  scope="col">Selected Date</th>
+                                                <th  scope="col">Status</th>
+                                                <th  scope="col">Details</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for service in services %}
+                                                    <tr>
+                                                        <td scope="row" >{{ service.service_type }}</td>
+                                                        <td scope="row" >{{ service.vehicle_type }}</td>
+                                                        <td scope="row" >{{ service.vehicle_make }}</td>
+                                                        <td scope="row" >{{ service.vehicle_licence }}</td>
+                                                        <td scope="row" >{{ service.vehicle_engine_type }}</td>
+                                                        <td scope="row" >{{ service.selected_date }}</td>
+                                                        <td scope="row" >{{ service.status }}</td>
+                                                        <td><button class="btn btn-warning">details</button></td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                    </table>
+                                {% else %}
+                                    <h1>No Data to show</h1>
+                                {% endif %}
+                            </div>
+                        </div>
 			</div>
         </div>
     </main>
