@@ -1,86 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-		
-		<title>Ger's Garage</title>
-		
-		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Titillium+Web:300,400,700|" rel="stylesheet" type="text/css">
-		
-		<!-- Loading main css file -->
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-		<link rel="stylesheet" href="../static/css/mdb.css">
-		<link rel="stylesheet" href="../static/css/style.css">
-		<!--[if lt IE 9]>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+
+	<title>Ger's Garage</title>
+
+	<!-- Loading third party fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Titillium+Web:300,400,700|" rel="stylesheet" type="text/css">
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+	<script src="../static/js/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+		integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../static/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/css/bootstrap.css">
+	<link rel="stylesheet" href="../static/css/mdb.css">
+	<link rel="stylesheet" href="../static/css/style.css">
+
+	{{ form.media }}
+	<!--[if lt IE 9]>
 		<script src="../static/js/ie-support/html5.js"></script>
 		<script src="../static/js/ie-support/respond.js"></script>
 		<![endif]-->
 
-	</head>
-	<body>
-					
-			<header>
-				<div class="container">
-					<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-						<a id="branding" class="navbar-brand" href="{% url 'garage-home' %}">
-							<img src="../static/images/logo.png" height="45" alt="mdb logo">
-							<h1 class="ml-3 float-right">Ger's<span class="">Garage</span></h1>
-						</a>
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarNav">
-								<ul class="navbar-nav ml-auto mr-4">
-										<li class="nav-item mr-4"><a  class="nav-link"  href="{% url 'garage-home' %}">Home</a></li>
-										{% if user.is_superuser %}
-											<li class="nav-item mr-4"><a  class="nav-link"  href="{% url 'garage-admin' %}">Jobs</a></li>
-										{% endif %}
-										<li class="nav-item"><a class="nav-link"  href="{% url 'garage-about' %}">About</a></li>
-										{% if user.is_authenticated %}
-											<li class="nav-item mr-4"><a class="nav-link"  href="{% url 'garage-service' %}">Services</a></li>
-											<li class="nav-item mr-4"><a class="nav-link"  href="{% url 'garage-history' %}">History</a></li>
-											<li class="nav-item mr-4"><a class="nav-link"  href="{% url 'garage-logout' %}">Logout</a></li>
-										{% else %}
-											<li class="nav-item mr-4"><a class="nav-link"  href="{% url 'garage-login' %}">Login</a></li>
-											<li class="nav-item mr-4"><a class="nav-link"  href="{% url 'garage-register' %}">Rgister</a></li>
-										{% endif %}
-								</ul>
-						</div>
-					</nav>
-				</div>
-			</header> <!-- .site-header -->
-				{% if messages %}
-					{% for message in messages %}
-						<div class="alert alert-{{ message.tags }}">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
-				{% block content %}{% endblock content %}
-			<footer class="site-footer">
-				<div class="container">
-					<div class="social-links">
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-google-plus"></i></a>
-						<a href="#"><i class="fa fa-pinterest"></i></a>
-					</div>
-				</div>
-			</footer> <!-- .site-footer -->
+</head>
 
-		<script src="../static/js/jquery-3.4.1.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-		<script src="../static/js/mdb.js"></script>
-		<script src="../static/js/bootstrap.js"></script>
-		<script>
-			$(function() {
-				$("#datepicker").datepicker({ minDate: new Date()});
-			});
-		</script>
-			
-	</body>
+<body>
+
+	<header>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+				<a id="branding" class="navbar-brand d-flex" href="{% url 'garage-home' %}">
+					<figure class='logo'><img src="../static/images/logo.png" alt="mdb logo"></figure>
+					<h1 class="ml-3 float-right">Ger's<span class="">Garage</span></h1>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+					aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto mr-4">
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-home' %}">Home</a></li>
+						{% if user.is_superuser %}
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-jobs' %}">Jobs</a></li>
+						{% endif %}
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-about' %}">About</a></li>
+						{% if user.is_authenticated %}
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-service' %}">Services</a>
+						</li>
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-history' %}">History</a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-logout' %}">Logout</a></li>
+						{% else %}
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-login' %}">Login</a></li>
+						<li class="nav-item mr-4"><a class="nav-link" href="{% url 'garage-register' %}">Rgister</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header> <!-- .site-header -->
+	<div class="main-wrapper py-3">
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+		{% endfor %}
+		{% endif %}
+		{% block content %}{% endblock content %}
+	</div>
+
+	<footer class="site-footer">
+		<div class="container">
+			<div class="social-links">
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-google-plus"></i></a>
+				<a href="#"><i class="fa fa-pinterest"></i></a>
+			</div>
+		</div>
+	</footer> <!-- .site-footer -->
+
+
+	<script src="../static/js/mdb.js"></script>
+	<script src="../static/js/bootstrap.js"></script>
+
+	<script>
+		$('.datepicker01').datetimepicker();
+	</script>
+</body>
 
 </html>

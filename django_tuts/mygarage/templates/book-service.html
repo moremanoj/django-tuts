@@ -5,51 +5,23 @@
 				
 				<div class="fullwidth-block content">
 					<div class="container">
-						<h2 class="entry-title">Natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto</h2>
 
-						<form method="POST" action="#" class="content-section contact-form">
-								{% csrf_token %}
-								<fieldset class="form-group">
-									{{ form|crispy }}
-								</fieldset>
-								<div class="form-group">
-									<button class="btn btn-info" type="submit">Book </button>
+						<div class="card">
+							<h5 class="card-header bg-dark white-text text-center py-4">
+									<strong>Book your service Now</strong>
+								</h5>
+								<div class="card-body px-lg-5 pt-0">
+										<form method="POST" action="#" class="content-section contact-form">
+												{% csrf_token %}
+												<fieldset class="form-group">
+													{{ form|crispy }}
+												</fieldset>
+												<div class="form-group">
+													<button class="btn btn-custom w-100 btn-rounded" type="submit">Book </button>
+												</div>
+											</form>
+										</form>
 								</div>
-							</form>
-						</form>
-
-
-						<div class="feature-grid">
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-cpu.png" alt=""></figure>
-								<h2 class="feature-title">CPU Diagnostics</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-suspension.png" alt=""></figure>
-								<h2 class="feature-title">Suspension</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-engine.png" alt=""></figure>
-								<h2 class="feature-title">Engine</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-brake.png" alt=""></figure>
-								<h2 class="feature-title">Brakes</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-steering.png" alt=""></figure>
-								<h2 class="feature-title">Steering</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
-							<div class="feature">
-								<figure class="feature-image"><img src="../static/images/icon-exhaust.png" alt=""></figure>
-								<h2 class="feature-title">Exhaust System</h2>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas dicta earum aliquam</p>
-							</div>
 						</div>	
 					</div>
 				</div>

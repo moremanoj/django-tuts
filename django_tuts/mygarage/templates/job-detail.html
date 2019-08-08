@@ -12,7 +12,7 @@
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <!-- Form -->
-            <form style="color: #757575;" action="#!">
+            <form method="POST" style="color: #757575;" action="#!">
 
                 <div class="form-row">
                     <div class="col">
@@ -123,10 +123,11 @@
                 <!-- Newsletter -->
 
                 <!-- Sign up button -->
-                <div class="form-row">
-                    <a href="/print" class="btn btn-custom m-auto" type="submit">Print</a>
+                <div class="form-row d-flex justify-content-center">
+                    <a href="/print" name='print'><button class="btn btn-custom">Print</button></a>
+                    <button name='update' class="btn btn-custom" type="submit">Update</button>
                 </div>
-
+               
                 <!-- Social register -->
             </form>
             <!-- Form -->
