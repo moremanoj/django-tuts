@@ -25,6 +25,10 @@ class BookService(models.Model):
     customer_comments = models.TextField()
     selected_date = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=100, default='Booked')
+    assigned_to =  models.CharField(max_length=100, default='')
+    parts_price = models.DecimalField(max_digits=5,decimal_places=2, default=0.0)
+    servicing_price = models.DecimalField(max_digits=5,decimal_places=2, default=0.0)
+    total_price = models.DecimalField(max_digits=5,decimal_places=2, default=0.0)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):

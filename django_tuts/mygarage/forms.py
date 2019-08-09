@@ -3,7 +3,7 @@ from .models import BookService
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.admin.widgets import AdminDateWidget
+from .utils import getDisableDates
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 
@@ -16,6 +16,7 @@ VEHICLE_MAKE = [('Maruti Suzuki Alto','Maruti Suzuki Alto'), ('Maruti Suzuki Alt
                 ('Tata Tiago','Tata Tiago'),('Maruti Suzuki Celerio','Maruti Suzuki Celerio'),
                 ('Ford Figo','Ford Figo'), ('Maruti Suzuki baleno','Maruti Suzuki baleno'),	('Hundai Elite i20','Hundai Elite i20')]
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
@@ -24,23 +25,24 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
                 
 class ServiceBookingForm(forms.ModelForm):
+    disable_dates = []
     mindate = "{}".format(timezone.now().date())
     selected_date = forms.DateTimeField( widget=DateTimePicker(
         options={
             'minDate': mindate,
             'maxDate': '2029-01-20',
             'format': 'L',
-			'disabledDates' : [],
+			'disabledDates' : disable_dates,
             'daysOfWeekDisabled': [0]
         },
         attrs={
             'min' : timezone.now().date()
         }
     ),)
-    # selected_date = forms.DateTimeField(widget=forms.TextInput(attrs={'min': timezone.now().date(), 'type':'date','id':'datepicker'}))
     service_type = forms.CharField(widget=forms.Select(choices=SERVICE_TYPES))
     vehicle_type = forms.CharField(widget=forms.Select(choices=VEHICLE_TYPE))
     vehicle_make = forms.CharField(widget=forms.Select(choices=VEHICLE_MAKE))
+    
     class Meta:
         model = BookService
         widgets =  {

@@ -2,7 +2,9 @@
 
 1. create a virtual environment : ``` virtualenv env ```
 2. activate a virtual environment : ``` source env/bin/activate ``` OR ``` .\env\Scripts\activate ```
-3. install required pacakges of django :  ``` pip install -r requirements.txt ``` and ```pip install --pre xhtml2pdf ```
+3. install required pacakges of django :  ``` pip install -r requirements.txt ``` and ``` pip install --pre xhtml2pdf ```
+* Before migrating the database make sure you remove all the `__pycache` folders and empty the migration folder except the `__init__.py` file 
+
 4. migrate databases command : ``` python manage.py makemigrations ``` 
     and after that ``` python manage.py migrate ```
 5. add admin to access admin access  : ``` python manage.py createsuperuser ```

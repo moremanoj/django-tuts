@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% csrf_token %}
 <!-- Material form register -->
 <div class="container">
     <div class="card">
@@ -12,8 +11,8 @@
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <!-- Form -->
-            <form method="POST" style="color: #757575;" action="#!">
-
+            <form method="POST" style="color: #757575;" action="#">
+                {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
                         <!-- First name -->
@@ -26,7 +25,7 @@
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled id="materialRegisterFormLastName" class="form-control">
+                            <input type="text" disabled value="{{ service.contact_details }}" id="materialRegisterFormLastName" class="form-control">
                             <label for="materialRegisterFormLastName">contact_details</label>
                         </div>
                     </div>
@@ -43,7 +42,7 @@
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled id="materialRegisterFormLastName" class="form-control">
+                            <input type="text" disabled value="{{ service.vehicle_type }}" id="materialRegisterFormLastName" class="form-control">
                             <label for="materialRegisterFormLastName">vehicle_type</label>
                         </div>
                     </div>
@@ -61,7 +60,7 @@
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled id="materialRegisterFormLastName" class="form-control">
+                            <input type="text" disabled value="{{ service.vehicle_licence }}" id="materialRegisterFormLastName" class="form-control">
                             <label for="materialRegisterFormLastName">vehicle_licence</label>
                         </div>
                     </div>
@@ -79,52 +78,71 @@
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled id="materialRegisterFormLastName" class="form-control">
+                            <input type="text" disabled value="{{ service.selected_date }}" id="materialRegisterFormLastName" class="form-control">
                             <label for="materialRegisterFormLastName">selected_date</label>
                         </div>
                     </div>
                 </div>
+
+                
                 <div class="form-row">
-                    <div class='col'>
-                        <div class="row">
-                            <div class='col-sm-2'><label>price :</label></div>
-                            <div class='col-sm-2'><span>&euro;200</span></div>
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            <select class="form-control mdb-select">
+                                <option value="" disabled selected>Set Status</option>
+                                <option value="Smith">Smith</option>
+                                <option value="Marko">Marko</option>
+                                <option value="Dwyane">Dwyane</option>
+                                <option value="Jack">Jack</option>
+                              </select>
+
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class='col'>
-                        <div class="row">
-                            <div class='col-sm-2'><label>price :</label></div>
-                            <div class='col-sm-2'><span>&euro;200</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class='col'>
-                        <div class="row">
-                            <div class='col-sm-2'><label>price :</label></div>
-                            <div class='col-sm-2'><span>&euro;200</span></div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <div class="md-form">
+                                    <select class="form-control mdb-select">
+                                        <option value="" disabled selected>Assign To</option>
+                                        <option value="Smith">Smith</option>
+                                        <option value="Marko">Marko</option>
+                                        <option value="Dwyane">Dwyane</option>
+                                        <option value="Jack">Jack</option>
+                                      </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class='col-sm-6'>
-                        <hr />
+                    <div class='col'>
                         <div class="row">
-                            <div class='col-sm-4'><label>Total :</label></div>
-                            <div class='col-sm-8'><span>&euro;200</span></div>
+                            <div class='col-sm-2'><label> Parts Price :</label></div>
+                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
                         </div>
                     </div>
                 </div>
-
+                <div class="form-row">
+                    <div class='col'>
+                        <div class="row">
+                            <div class='col-sm-2'><label> Servicing Price :</label></div>
+                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div class="form-row">
+                    <div class='col'>
+                        <div class="row">
+                            <div class='col-sm-2'><label>Total price :</label></div>
+                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Newsletter -->
 
                 <!-- Sign up button -->
                 <div class="form-row d-flex justify-content-center">
-                    <a href="/print" name='print'><button class="btn btn-custom">Print</button></a>
                     <button name='update' class="btn btn-custom" type="submit">Update</button>
                 </div>
                
