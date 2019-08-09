@@ -7,6 +7,10 @@ from .utils import getDisableDates
 from tempus_dominus.widgets import DatePicker, TimePicker, DateTimePicker
 
 
+ENGINEER = [ ('STEVEN', 'STEVEN'), ('MARKO', 'MARKO'),
+                  ('DAVID', 'DAVID'), ('NEWTON', 'NEWTON')]
+STATUS = [ ('Booked', 'Booked'), ('InService', 'InService'), ('Collected', 'Collected'),
+                  ('Fixed/Completed', 'Fixed/Completed'), ('Unrepairable/Scrapped', 'Unrepairable/Scrapped')]
 SERVICE_TYPES = [ ('Annual Service', 'Annual Service'), ('Major Service', 'Major Service'),
                   ('Repairs/Faults', 'Repairs/Faults'), ('Major Repairs', 'Major Repairs')]
 VEHICLE_TYPE = [('Hatchback','Hatchback'), ('Sedan','Sedan'), ('MPV','MPV'),
@@ -34,9 +38,6 @@ class ServiceBookingForm(forms.ModelForm):
             'format': 'L',
 			'disabledDates' : disable_dates,
             'daysOfWeekDisabled': [0]
-        },
-        attrs={
-            'min' : timezone.now().date()
         }
     ),)
     service_type = forms.CharField(widget=forms.Select(choices=SERVICE_TYPES))
@@ -51,3 +52,18 @@ class ServiceBookingForm(forms.ModelForm):
         fields = ['service_type', 'customer_name', 'contact_details', 
                   'vehicle_type', 'vehicle_make','vehicle_licence', 'vehicle_engine_type',
                   'customer_comments','selected_date']
+
+class UpdateBookingForm(forms.ModelForm):
+
+    service_type = forms.CharField(widget=forms.Select(choices=SERVICE_TYPES))
+    vehicle_type = forms.CharField(widget=forms.Select(choices=VEHICLE_TYPE))
+    vehicle_make = forms.CharField(widget=forms.Select(choices=VEHICLE_MAKE))
+    status = forms.CharField(widget=forms.Select(choices=STATUS))
+    assigned_to = forms.CharField(widget=forms.Select(choices=ENGINEER))
+
+    class Meta:
+        model = BookService    
+        fields = ['service_type', 'customer_name', 'contact_details', 
+                'vehicle_type', 'vehicle_make','vehicle_licence', 'vehicle_engine_type',
+                'customer_comments','selected_date','status','assigned_to', 
+                'parts_price', 'servicing_price','total_price']

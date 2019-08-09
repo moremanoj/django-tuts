@@ -11,22 +11,22 @@
         <!--Card content-->
         <div class="card-body px-lg-5 pt-0">
             <!-- Form -->
-            <form method="POST" style="color: #757575;" action="#">
+            <form method="POST" style="color: #757575;" action="">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col">
                         <!-- First name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.customer_name }}"
+                            <input type="text" name="customer_name" disabled value="{{ service.customer_name }}"
                                 id="materialRegisterFormFirstName" class="form-control">
-                            <label for="materialRegisterFormFirstName">customer_name</label>
+                            <label for="materialRegisterFormFirstName">Customer Name</label>
                         </div>
                     </div>
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.contact_details }}" id="materialRegisterFormLastName" class="form-control">
-                            <label for="materialRegisterFormLastName">contact_details</label>
+                            <input type="text" name="contact_details" disabled value="{{ service.contact_details }}" id="materialRegisterFormLastName" class="form-control">
+                            <label for="materialRegisterFormLastName">Contact Details</label>
                         </div>
                     </div>
                 </div>
@@ -34,34 +34,16 @@
                     <div class="col">
                         <!-- First name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.service_type }}"
+                            <input type="text" name="service_type" disabled value="{{ service.service_type }}"
                                 id="materialRegisterFormFirstName" class="form-control">
-                            <label for="materialRegisterFormFirstName">service_type</label>
+                            <label for="materialRegisterFormFirstName">Service Type</label>
                         </div>
                     </div>
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.vehicle_type }}" id="materialRegisterFormLastName" class="form-control">
-                            <label for="materialRegisterFormLastName">vehicle_type</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-                        <!-- First name -->
-                        <div class="md-form">
-                            <input type="text" disabled value="{{ service.vehicle_make }}"
-                                id="materialRegisterFormFirstName" class="form-control">
-                            <label for="materialRegisterFormFirstName">vehicle_make</label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <!-- Last name -->
-                        <div class="md-form">
-                            <input type="text" disabled value="{{ service.vehicle_licence }}" id="materialRegisterFormLastName" class="form-control">
-                            <label for="materialRegisterFormLastName">vehicle_licence</label>
+                            <input type="text" name="vehicle_type" disabled value="{{ service.vehicle_type }}" id="materialRegisterFormLastName" class="form-control">
+                            <label for="materialRegisterFormLastName">Vehicle Type</label>
                         </div>
                     </div>
                 </div>
@@ -70,16 +52,34 @@
                     <div class="col">
                         <!-- First name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.vehicle_make }}"
+                            <input type="text" name="vehicle_make" disabled value="{{ service.vehicle_make }}"
                                 id="materialRegisterFormFirstName" class="form-control">
-                            <label for="materialRegisterFormFirstName">vehicle_engine_type</label>
+                            <label for="materialRegisterFormFirstName">Vehicle Make</label>
                         </div>
                     </div>
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                            <input type="text" disabled value="{{ service.selected_date }}" id="materialRegisterFormLastName" class="form-control">
-                            <label for="materialRegisterFormLastName">selected_date</label>
+                            <input type="text" name="vehicle_licence" disabled value="{{ service.vehicle_licence }}" id="materialRegisterFormLastName" class="form-control">
+                            <label for="materialRegisterFormLastName">Vehicle Licence</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            <input type="text" name="vehicle_engine_type" disabled value="{{ service.vehicle_engine_type }}"
+                                id="materialRegisterFormFirstName" class="form-control">
+                            <label for="materialRegisterFormFirstName">Vehicle Engine Type</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <div class="md-form">
+                            <input type="text" name="selected_date" disabled value="{{ service.selected_date }}" id="materialRegisterFormLastName" class="form-control">
+                            <label for="materialRegisterFormLastName">Servicing Date</label>
                         </div>
                     </div>
                 </div>
@@ -89,12 +89,13 @@
                     <div class="col">
                         <!-- First name -->
                         <div class="md-form">
-                            <select class="form-control mdb-select">
-                                <option value="" disabled selected>Set Status</option>
-                                <option value="Smith">Smith</option>
-                                <option value="Marko">Marko</option>
-                                <option value="Dwyane">Dwyane</option>
-                                <option value="Jack">Jack</option>
+                            <select class="form-control mdb-select" name="status">
+                                <option value="" disabled selected>Select Status</option>
+                                <option {% if service.status == "Booked" %} selected {% endif %} value="Booked">Booked</option>
+                                <option  {% if service.status == "InService" %} selected {% endif %} value="InService">In Service</option>
+                                <option {% if service.status == "Fixed/Completed" %} selected {% endif %} value="Fixed/Completed">Fixed / Completed</option>
+                                <option {% if service.status == "Collected" %} selected {% endif %} value="Collected">Collected</option>
+                                <option {% if service.status == "Unrepairable/Scrapped" %} selected {% endif %} value="Unrepairable/Scrapped">Unrepairable / Scrapped</option>
                               </select>
 
                         </div>
@@ -102,12 +103,12 @@
                     <div class="col">
                         <!-- Last name -->
                         <div class="md-form">
-                                    <select class="form-control mdb-select">
-                                        <option value="" disabled selected>Assign To</option>
-                                        <option value="Smith">Smith</option>
-                                        <option value="Marko">Marko</option>
-                                        <option value="Dwyane">Dwyane</option>
-                                        <option value="Jack">Jack</option>
+                                    <select class="form-control mdb-select" name="assigned_to">
+                                        <option value="" disabled selected>Assign To Engineer</option>
+                                        <option {% if service.assigned_to == "STEVEN" %} selected {% endif %} value="STEVEN">STEVEN</option>
+                                        <option {% if service.assigned_to == "MARKO" %} selected {% endif %} value="MARKO">MARKO</option>
+                                        <option {% if service.assigned_to == "DAVID" %} selected {% endif %} value="DAVID">DAVID</option>
+                                        <option {% if service.assigned_to == "NEWTON" %} selected {% endif %} value="NEWTON">NEWTON</option>
                                       </select>
                         </div>
                     </div>
@@ -117,7 +118,7 @@
                     <div class='col'>
                         <div class="row">
                             <div class='col-sm-2'><label> Parts Price :</label></div>
-                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
+                            <div class='col-sm-2'><span>&euro;</span><input name="parts_price" type="number" value="{{ service.parts_price}}"></div>
                         </div>
                     </div>
                 </div>
@@ -125,7 +126,7 @@
                     <div class='col'>
                         <div class="row">
                             <div class='col-sm-2'><label> Servicing Price :</label></div>
-                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
+                            <div class='col-sm-2'><span>&euro;</span><input name="servicing_price" type="number" value="{{ service.servicing_price}}"></div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +135,7 @@
                     <div class='col'>
                         <div class="row">
                             <div class='col-sm-2'><label>Total price :</label></div>
-                            <div class='col-sm-2'><span>&euro;</span><input type="number" value="{{ service.parts_price}}"></div>
+                            <div class='col-sm-2'><span>&euro;</span><input name="total_price" type="number" value="{{ service.total_price}}"></div>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ def render_to_pdf(template_src, context_dict={}):
     return None
 
 def getDisableDates():
-    all_services = list(map(lambda x: f'{x.date()}', 
+    all_services = list(map(lambda x: '{}'.format(x.date()), 
                             BookService.objects.values_list('selected_date', flat=True)))
     disable_dates = list(filter( lambda x: all_services.count(x) >= 20 , all_services))
     return disable_dates

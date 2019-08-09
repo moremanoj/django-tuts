@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.http import HttpResponse
 from .models import Post, BookService
-from .forms import UserRegisterForm, ServiceBookingForm
+from .forms import UserRegisterForm, ServiceBookingForm, UpdateBookingForm
 from django.contrib import messages
 from django.views.generic import View, DetailView, ListView, UpdateView
 from .utils import render_to_pdf, getServiceData 
 from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
 
 
 class GeneratePDF(View):
@@ -35,12 +36,16 @@ class ServiceDetailView(DetailView):
 
 
 class JobUpdateView(UpdateView):
-    def get(self, request, *args, **kwargs):
-        model = BookService
-        form = ServiceBookingForm()
-        context = { 'service': get_object_or_404(BookService, pk=kwargs['pk'])}
-        return render(request, 'job-detail.html', context)
-        
+    model = BookService
+    form = UpdateBookingForm()
+    fields = ['status','assigned_to', 'parts_price', 'servicing_price','total_price']
+    context_object_name = 'service'
+    template_name = 'job-detail.html'
+    
+    def get_success_url(self):
+        return reverse('garage-jobs')
+
+
 
 class JobListView(ListView):
     model = BookService
@@ -56,7 +61,6 @@ def Service(request):
                 obj = form.save(commit=False)
                 obj.customer=request.user
                 obj.save()
-                messages.success(request, f'Successfully registered !')
                 return redirect('garage-history')
         else:
             form = ServiceBookingForm()
@@ -75,7 +79,6 @@ def Register(request):
             if form.is_valid():
                 form.save()
                 username = form.cleaned_data.get('username')
-                messages.success(request, f'Account created for {username}!')
                 return redirect('garage-login')
         else:
             form = UserRegisterForm()
